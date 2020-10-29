@@ -1,0 +1,33 @@
+﻿<Window x:Class="LibraryApp.View.AdministratorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryApp.View"
+        mc:Ignorable="d"
+        Title="Администратор" Height="481.522" Width="621.739">
+    <Grid>
+        <TabControl x:Name="tabControl" Margin="1,-4,0,3">
+            <TabItem Header="Читатели">
+                <Grid x:Name="TebleReader" Background="#FFE5E5E5">
+                    <DataGrid x:Name="DataGridReader" Margin="-1,-1,99,-3" CanUserAddRows="False" CanUserDeleteRows="False"/>
+                    <Button x:Name="button1" Content="Добавить" HorizontalAlignment="Right" Height="36" Margin="0,9,5,0" VerticalAlignment="Top" Width="86" Click="AddingButton_Click"/>
+                    <Button x:Name="button1_Copy" Content="Изменить" HorizontalAlignment="Right" Height="36" Margin="0,59,5,0" VerticalAlignment="Top" Width="86" Click="ReaderEditButton_Click"/>
+                    <Button x:Name="button1_Copy1" Content="Удалить" HorizontalAlignment="Right" Height="36" Margin="0,107,5,0" VerticalAlignment="Top" Width="86" Click="RemovingReaderButton_Click"/>
+                    <Button x:Name="button2" Content="Выход" HorizontalAlignment="Right" Margin="0,0,1,3" VerticalAlignment="Bottom" Width="92" Height="47" Click="ExitButton_Click"/>
+                    <Button x:Name="button_Copy3" Content="Обновить" HorizontalAlignment="Right" Margin="0,153,4,0" VerticalAlignment="Top" Width="89" Height="38" Click="UpdateButton_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Библиотекари">
+                <Grid x:Name="TableLibrarian" Background="#FFE5E5E5">
+                    <DataGrid x:Name="DataGridLibrarian" Margin="0,-1,99,-1" CanUserAddRows="False" CanUserDeleteRows="False"/>
+                    <Button x:Name="button" Content="Добавить" HorizontalAlignment="Right" Margin="0,14,5,0" VerticalAlignment="Top" Width="89" Height="38" Click="AddingButton_Click"/>
+                    <Button x:Name="button_Copy" Content="Изменить" HorizontalAlignment="Right" Margin="0,65,5,0" VerticalAlignment="Top" Width="89" Height="38" Click="LibrarianEditButton_Click"/>
+                    <Button x:Name="button_Copy1" Content="Удалить" HorizontalAlignment="Right" Margin="0,116,5,0" VerticalAlignment="Top" Width="89" Height="38" Click="RemovingLibrarianButton_Click"/>
+                    <Button x:Name="button2_Copy" Content="Выход" HorizontalAlignment="Right" Margin="0,0,1,3" VerticalAlignment="Bottom" Width="92" Height="47" Click="ExitButton_Click"/>
+                    <Button x:Name="button_Copy2" Content="Обновить" HorizontalAlignment="Right" Margin="0,166,5,0" VerticalAlignment="Top" Width="89" Height="38" Click="UpdateButton_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

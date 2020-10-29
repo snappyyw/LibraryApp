@@ -1,0 +1,26 @@
+﻿<Window x:Class="LibraryApp.View.PersonalDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryApp.View"
+        mc:Ignorable="d"
+        Title="Персональные данные" Height="442" Width="479">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFE364FF" Offset="0"/>
+                <GradientStop Color="#FF49E2A4" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label x:Name="label" Content="ФИО" HorizontalAlignment="Left" Height="30" Margin="30,59,0,0" VerticalAlignment="Top" Width="70" FontSize="16" FontFamily="Arial"/>
+        <Label x:Name="label_Copy" Content="Телефон" HorizontalAlignment="Left" Height="30" Margin="30,94,0,0" VerticalAlignment="Top" Width="90" FontSize="16" FontFamily="Arial"/>
+        <Label x:Name="label_Copy1" Content="Дата рождения:" HorizontalAlignment="Left" Height="30" Margin="30,160,0,0" VerticalAlignment="Top" Width="135" FontSize="16" FontFamily="Arial"/>
+        <CheckBox x:Name="EmpCheckBox" Content="Сотрудник" HorizontalAlignment="Left" Height="20" Margin="290,160,0,0" VerticalAlignment="Top" Width="115" FontSize="16" FontFamily="Arial"/>
+        <Button x:Name="button" Content="Вход" HorizontalAlignment="Left" Height="60" Margin="115,320,0,0" VerticalAlignment="Top" Width="245" Click="CreateButton_Click" Background="Red" FontSize="36" FontFamily="Arial" Foreground="White"/>
+        <DatePicker Name="Date" HorizontalAlignment="Left" Height="85" Margin="30,195,0,0" VerticalAlignment="Top" Width="135" FontSize="16" FontFamily="Arial"/>
+        <TextBox x:Name="FioTextBox" HorizontalAlignment="Left" Height="30" Margin="143,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" FontSize="16" FontFamily="Arial"/>
+        <TextBox x:Name="TelephoneTextBox" HorizontalAlignment="Left" Height="30" Margin="143,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" FontSize="16" FontFamily="Arial"/>
+
+    </Grid>
+</Window>

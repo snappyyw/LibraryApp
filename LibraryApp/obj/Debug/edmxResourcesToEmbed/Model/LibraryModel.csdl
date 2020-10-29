@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PublicationDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CoverImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberOfCopies" Type="Int32" Nullable="false" />
+    <Property Name="PublishedBooks" Type="Boolean" Nullable="false" />
+    <Property Name="PenaltyPoint" Type="Int32" Nullable="false" />
+    <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Books" FromRole="Books" ToRole="Journal" />
+  </EntityType>
+  <EntityType Name="Journal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookingStartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BookingEndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ReservationCode" Type="Int32" Nullable="false" />
+    <Property Name="BookingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdReader" Type="Int32" Nullable="false" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Journal_Books" FromRole="Journal" ToRole="Books" />
+    <NavigationProperty Name="Readers" Relationship="Self.FK_Journal_Readers" FromRole="Journal" ToRole="Readers" />
+  </EntityType>
+  <EntityType Name="Readers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsEmployee" Type="Boolean" Nullable="false" />
+    <Property Name="ReaderRating" Type="Int32" Nullable="false" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Readers" FromRole="Readers" ToRole="Journal" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Readers_Users" FromRole="Readers" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Readers" Relationship="Self.FK_Readers_Users" FromRole="Users" ToRole="Readers" />
+  </EntityType>
+  <Association Name="FK_Journal_Books">
+    <End Role="Books" Type="Self.Books" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Journal_Readers">
+    <End Role="Readers" Type="Self.Readers" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Readers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="IdReader" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Readers_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Readers" Type="Self.Readers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Readers">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibraryDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="Self.Books" />
+    <EntitySet Name="Journal" EntityType="Self.Journal" />
+    <EntitySet Name="Readers" EntityType="Self.Readers" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Journal_Books" Association="Self.FK_Journal_Books">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Readers" Association="Self.FK_Journal_Readers">
+      <End Role="Readers" EntitySet="Readers" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Readers_Users" Association="Self.FK_Readers_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Readers" EntitySet="Readers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

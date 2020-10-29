@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище LibraryDBModelContainer" CdmEntityContainer="LibraryDBEntities">
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="LibraryDBModel.Books">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CoverImage" ColumnName="CoverImage" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="NumberOfCopies" ColumnName="NumberOfCopies" />
+          <ScalarProperty Name="PublishedBooks" ColumnName="PublishedBooks" />
+          <ScalarProperty Name="PenaltyPoint" ColumnName="PenaltyPoint" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Journal">
+      <EntityTypeMapping TypeName="LibraryDBModel.Journal">
+        <MappingFragment StoreEntitySet="Journal">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BookingStartDate" ColumnName="BookingStartDate" />
+          <ScalarProperty Name="BookingEndDate" ColumnName="BookingEndDate" />
+          <ScalarProperty Name="ReservationCode" ColumnName="ReservationCode" />
+          <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+          <ScalarProperty Name="IdReader" ColumnName="IdReader" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Readers">
+      <EntityTypeMapping TypeName="LibraryDBModel.Readers">
+        <MappingFragment StoreEntitySet="Readers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="IsEmployee" ColumnName="IsEmployee" />
+          <ScalarProperty Name="ReaderRating" ColumnName="ReaderRating" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="LibraryDBModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
