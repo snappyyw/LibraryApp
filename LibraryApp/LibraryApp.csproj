@@ -92,6 +92,9 @@
     <Compile Include="Model\Users.cs">
       <DependentUpon>LibraryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\AddingBookWindow.xaml.cs">
+      <DependentUpon>AddingBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddingUserWindow.xaml.cs">
       <DependentUpon>AddingUserWindow.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddingBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddingUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

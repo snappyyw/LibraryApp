@@ -5,16 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryApp.View"
         mc:Ignorable="d"
-        Title="Изменение" Height="422.825" Width="446.739">
+        Title="Изменение" Height="501.912" Width="498.968">
     <Grid>
         <Label x:Name="label" Content="Логин" HorizontalAlignment="Left" Margin="59,38,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
         <Label x:Name="label_Copy" Content="Пароль" HorizontalAlignment="Left" Margin="59,78,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
         <Label x:Name="label_Copy1" Content="Роль" HorizontalAlignment="Left" Margin="59,117,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
-        <TextBox x:Name="LoginTextBox" Height="31" Margin="128,35,86,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <TextBox x:Name="PasswordTextBox" Height="31" Margin="128,78,86,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <CheckBox x:Name="BlocCheckBox" Content="Заблокировать" HorizontalAlignment="Right" Margin="0,178,40,187" Width="112" d:LayoutOverrides="VerticalAlignment"/>
-        <Button x:Name="button" Content="Добавить" Margin="70,0,58,55" VerticalAlignment="Bottom" Height="79" Click="AddButton_Click"/>
-        <ComboBox x:Name="RoleComboBox" Height="27" Margin="129,119,87,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LoginTextBox" Height="31" Margin="128,35,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="PasswordTextBox" Height="31" Margin="128,78,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <CheckBox x:Name="BlocCheckBox" Content="Заблокировать" HorizontalAlignment="Right" Margin="0,353,190,93" Width="112"/>
+        <Button x:Name="button" Content="Добавить" Margin="55,0,51,23" VerticalAlignment="Bottom" Height="49" Click="AddButton_Click"/>
+        <ComboBox x:Name="RoleComboBox" Height="27" Margin="128,119,96,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy2" Content="ФИО" HorizontalAlignment="Left" Margin="59,156,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
+        <Label x:Name="label_Copy3" Content="Дата рождения" HorizontalAlignment="Left" Margin="55,273,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
+        <Label x:Name="label_Copy4" Content="Рейтинг" HorizontalAlignment="Left" Margin="59,228,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
+        <Label x:Name="label_Copy5" Content="Телефон" HorizontalAlignment="Left" Margin="59,195,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
+        <CheckBox x:Name="EmpCheckBox" Content="Сотрудник" HorizontalAlignment="Right" Margin="0,353,302,91" Width="112"/>
+        <TextBox x:Name="FIOTextBox" Height="31" Margin="128,157,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="TelephoneTextBox" Height="31" Margin="128,193,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="RatingTextBox" Height="31" Margin="128,228,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <DatePicker Name="BirthDatePiker" HorizontalAlignment="Left" Height="27" Margin="176,273,0,0" VerticalAlignment="Top" Width="151"/>
 
     </Grid>
 </Window>

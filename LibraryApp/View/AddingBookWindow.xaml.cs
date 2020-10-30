@@ -16,21 +16,19 @@ using System.Windows.Shapes;
 namespace LibraryApp.View
 {
     /// <summary>
-    /// Логика взаимодействия для Reader.xaml
+    /// Логика взаимодействия для AddingBookWindow.xaml
     /// </summary>
-    public partial class ReaderWindow : Window
+    public partial class AddingBookWindow : Window
     {
-        public ReaderWindow(int id)
+        Books _books = new Books();
+        public AddingBookWindow()
         {
             InitializeComponent();
-            DataGridBook.ItemsSource = LibraryDBEntities.GetContext().Books.Where(p => p.PublishedBooks == true).ToList();
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            _books.Author = AuthorTextBox.Text;
         }
     }
 }

@@ -12,6 +12,7 @@
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="DataGridBook" HorizontalAlignment="Left" Height="371" VerticalAlignment="Top" Width="637" CanUserAddRows="False" CanUserDeleteRows="False"/>
                     <Button x:Name="button" Content="Бронировать" HorizontalAlignment="Left" Height="60" Margin="647,15,0,0" VerticalAlignment="Top" Width="129"/>
+                    <Button x:Name="button_Copy" Content="Выход" HorizontalAlignment="Left" Height="60" Margin="647,306,0,0" VerticalAlignment="Top" Width="129" Click="ExitButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="История">

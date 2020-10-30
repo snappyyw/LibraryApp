@@ -66,6 +66,8 @@ namespace LibraryApp.View
                 try
                 {
                     Users users = (Users)DataGridReader.SelectedItems[0];
+                    var reader = LibraryDBEntities.GetContext().Readers.FirstOrDefault(r => r.IdUser == users.Id);
+                    LibraryDBEntities.GetContext().Readers.Remove(reader);
                     LibraryDBEntities.GetContext().Users.Remove(users);
                     LibraryDBEntities.GetContext().SaveChanges();
                 }
