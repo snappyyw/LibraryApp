@@ -16,7 +16,7 @@ namespace LibraryApp.Model
     {
         public int Id { get; set; }
         public System.DateTime BookingStartDate { get; set; }
-        public System.DateTime BookingEndDate { get; set; }
+        public Nullable<System.DateTime> BookingEndDate { get; set; }
         public int ReservationCode { get; set; }
         public string BookingStatus { get; set; }
         public int IdReader { get; set; }

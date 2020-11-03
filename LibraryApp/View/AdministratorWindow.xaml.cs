@@ -27,9 +27,14 @@ namespace LibraryApp.View
             DataGridLibrarian.ItemsSource = LibraryDBEntities.GetContext().Users.Where(p => p.Role == "Библиотекарь").ToList();
         }
 
-        private void AddingButton_Click(object sender, RoutedEventArgs e)
+        private void AddingReaderButton_Click(object sender, RoutedEventArgs e)
         {
-            AddingWindow addingWindow = new AddingWindow();
+            AddingWindow addingWindow = new AddingWindow("Читатель");
+            addingWindow.Show();
+        }
+        private void AddingLibrarianButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddingWindow addingWindow = new AddingWindow("Библиотекарь");
             addingWindow.Show();
         }
 
@@ -87,20 +92,22 @@ namespace LibraryApp.View
 
         private void ReaderEditButton_Click(object sender, RoutedEventArgs e)
         {
-            Users user = null;
             if (DataGridReader.SelectedItems.Count > 0)
-                user = (Users)DataGridReader.SelectedItems[0];
-            AddingWindow addingWindow = new AddingWindow(user);
-            addingWindow.Show();
+            {
+                Users user = (Users)DataGridReader.SelectedItems[0];
+                AddingWindow addingWindow = new AddingWindow(user, "Читатель");
+                addingWindow.Show();
+            }
         }
 
         private void LibrarianEditButton_Click(object sender, RoutedEventArgs e)
         {
-            Users user = null;
             if (DataGridLibrarian.SelectedItems.Count > 0)
-                user = (Users)DataGridLibrarian.SelectedItems[0];
-            AddingWindow addingWindow = new AddingWindow(user);
-            addingWindow.Show();
+            {
+                Users user = (Users)DataGridLibrarian.SelectedItems[0];
+                AddingWindow addingWindow = new AddingWindow(user, "Библиотекарь");
+                addingWindow.Show();
+            }
         }
     }
 }

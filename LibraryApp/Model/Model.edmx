@@ -12,7 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Author" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PublicationDate" Type="datetime" />
+          <Property Name="PublicationDate" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="CoverImage" Type="varbinary(max)" />
           <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
@@ -20,6 +20,7 @@
           <Property Name="PublishedBooks" Type="bit" Nullable="false" />
           <Property Name="PenaltyPoint" Type="int" Nullable="false" />
           <Property Name="Tags" Type="nvarchar(max)" />
+          <Property Name="IsBlocked" Type="bit" />
         </EntityType>
         <EntityType Name="Journal">
           <Key>
@@ -27,7 +28,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookingStartDate" Type="datetime" Nullable="false" />
-          <Property Name="BookingEndDate" Type="datetime" Nullable="false" />
+          <Property Name="BookingEndDate" Type="datetime" />
           <Property Name="ReservationCode" Type="int" Nullable="false" />
           <Property Name="BookingStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdReader" Type="int" Nullable="false" />
@@ -121,7 +122,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PublicationDate" Type="DateTime" Precision="3" />
+          <Property Name="PublicationDate" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CoverImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -129,6 +130,7 @@
           <Property Name="PublishedBooks" Type="Boolean" Nullable="false" />
           <Property Name="PenaltyPoint" Type="Int32" Nullable="false" />
           <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsBlocked" Type="Boolean" />
           <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Books" FromRole="Books" ToRole="Journal" />
         </EntityType>
         <EntityType Name="Journal">
@@ -137,7 +139,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BookingStartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BookingEndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BookingEndDate" Type="DateTime" Precision="3" />
           <Property Name="ReservationCode" Type="Int32" Nullable="false" />
           <Property Name="BookingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdReader" Type="Int32" Nullable="false" />
@@ -244,6 +246,7 @@
                 <ScalarProperty Name="PublishedBooks" ColumnName="PublishedBooks" />
                 <ScalarProperty Name="PenaltyPoint" ColumnName="PenaltyPoint" />
                 <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

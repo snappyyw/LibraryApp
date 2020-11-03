@@ -1,0 +1,21 @@
+﻿<Window x:Class="LibraryApp.View.JournalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryApp.View"
+        mc:Ignorable="d"
+        Title="Журнал" Height="439.13" Width="607.608">
+    <Grid>
+        <Label x:Name="label" Content="Дата начала бронирования" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,55,0,0"/>
+        <Label x:Name="label_Copy1" Content="Дата окончания бронирования" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,91,0,0"/>
+        <Label x:Name="label_Copy" Content="Статус брони " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,125,0,0"/>
+        <Label x:Name="label_Copy2" Content="Код бронирования " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,161,0,0"/>
+        <DatePicker Name="DateStart" VerticalAlignment="Top" Margin="255,53,143,0" Height="23"/>
+        <DatePicker Name="DateEnd" VerticalAlignment="Top" Margin="253,90,144,0" Height="23"/>
+        <ComboBox x:Name="StatusComboBox" VerticalAlignment="Top" Margin="251,122,144,0" Height="21"/>
+        <TextBox x:Name="CodeTextBox" Margin="251,160,144,0" TextWrapping="Wrap" Text="" Height="21" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Сохранить" VerticalAlignment="Bottom" Margin="101,0,127,54" Height="87" Click="EditJourButton_Click"/>
+
+    </Grid>
+</Window>

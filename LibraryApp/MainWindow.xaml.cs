@@ -44,7 +44,7 @@ namespace LibraryApp
                             this.Close();
                             break;
                         case "Библиотекарь":
-                            LibrarianWindow librarian = new LibrarianWindow();
+                            LibrarianWindow librarian = new LibrarianWindow(user.Id);
                             found = true;
                             librarian.Show();
                             this.Close();

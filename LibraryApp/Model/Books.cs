@@ -23,7 +23,7 @@ namespace LibraryApp.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
-        public Nullable<System.DateTime> PublicationDate { get; set; }
+        public int PublicationDate { get; set; }
         public string Description { get; set; }
         public byte[] CoverImage { get; set; }
         public string Genre { get; set; }
@@ -31,6 +31,7 @@ namespace LibraryApp.Model
         public bool PublishedBooks { get; set; }
         public int PenaltyPoint { get; set; }
         public string Tags { get; set; }
+        public Nullable<bool> IsBlocked { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Journal> Journal { get; set; }

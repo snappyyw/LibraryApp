@@ -11,22 +11,42 @@
             <TabItem Header="Книги">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="DataGridBook" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="637"/>
-                    <Button x:Name="button" Content="Бронировать" HorizontalAlignment="Left" Height="50" Margin="647,10,0,0" VerticalAlignment="Top" Width="129"/>
+                    <Button x:Name="button" Content="Бронировать" HorizontalAlignment="Left" Height="50" Margin="647,10,0,0" VerticalAlignment="Top" Width="129" Click="BookButton_Click"/>
                     <Button x:Name="button_Copy" Content="Добавить" HorizontalAlignment="Left" Height="50" Margin="647,71,0,0" VerticalAlignment="Top" Width="129" Click="AddintBookButton_Click"/>
-                    <Button x:Name="button_Copy1" Content="Изменить" HorizontalAlignment="Left" Height="50" Margin="647,135,0,0" VerticalAlignment="Top" Width="129"/>
-                    <Button x:Name="button_Copy2" Content="Удалить" HorizontalAlignment="Left" Height="50" Margin="647,197,0,0" VerticalAlignment="Top" Width="129"/>
+                    <Button x:Name="button_Copy1" Content="Изменить" HorizontalAlignment="Left" Height="50" Margin="647,135,0,0" VerticalAlignment="Top" Width="129" Click="EditBookbutton_Click"/>
+                    <Button x:Name="button_Copy2" Content="Удалить" HorizontalAlignment="Left" Height="50" Margin="647,197,0,0" VerticalAlignment="Top" Width="129" Click="RemoveBookButton_Click"/>
                     <Button x:Name="button_Copy3" Content="Выход" HorizontalAlignment="Left" Height="50" Margin="647,326,0,0" VerticalAlignment="Top" Width="129" Click="ExitButton_Click"/>
                     <Button x:Name="button_Copy4" Content="Обновить" HorizontalAlignment="Left" Height="50" Margin="647,259,0,0" VerticalAlignment="Top" Width="129" Click="UpdateButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="История">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" Margin="0,0,-2,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="HistoryDataGrid" Margin="0,0,153,-10"/>
+                    <Button x:Name="button_Copy6" Content="Выход" HorizontalAlignment="Left" Height="50" Margin="647,326,0,0" VerticalAlignment="Top" Width="129" Click="ExitButton_Click"/>
+                    <Button x:Name="button_Copy5" Content="Обновить" HorizontalAlignment="Left" Height="50" Margin="647,12,0,0" VerticalAlignment="Top" Width="129" Click="UpdateButton_Click" d:LayoutOverrides="VerticalAlignment"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Читатели">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" Margin="0,0,-2,0">
+                    <DataGrid x:Name="DataGridReader" Margin="0,0,155,1"/>
+                    <Button x:Name="button_Copy7" Content="Выход" HorizontalAlignment="Left" Height="50" Margin="647,326,0,0" VerticalAlignment="Top" Width="129" Click="ExitButton_Click"/>
+                    <Button x:Name="button_Copy8" Content="Обновить" HorizontalAlignment="Left" Height="50" Margin="647,12,0,0" VerticalAlignment="Top" Width="129" Click="UpdateButton_Click" d:LayoutOverrides="VerticalAlignment"/>
+                    <Button x:Name="button1" Content="Добавить" HorizontalAlignment="Right" Height="47" Margin="0,72,12,0" VerticalAlignment="Top" Width="128" Click="AddingButton_Click"/>
+                    <Button x:Name="button1_Copy" Content="Изменить" HorizontalAlignment="Right" Height="47" Margin="0,138,12,0" VerticalAlignment="Top" Width="128" Click="ReaderEditButton_Click"/>
+                    <Button x:Name="button1_Copy1" Content="Удалить" HorizontalAlignment="Right" Margin="0,0,12,143" Width="128" Click="RemovingReaderButton_Click" Height="47" VerticalAlignment="Bottom"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Журнал">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="button_Copy9" Content="Выход" HorizontalAlignment="Left" Height="50" Margin="647,326,0,0" VerticalAlignment="Top" Width="129" Click="ExitButton_Click"/>
+                    <Button x:Name="button1_Copy2" Content="Изменить" HorizontalAlignment="Right" Height="47" Margin="0,78,10,0" VerticalAlignment="Top" Width="128" Click="JourEditButton_Click"/>
+                    <Button x:Name="button1_Copy3" Content="Удалить" HorizontalAlignment="Right" Margin="0,141,10,0" Width="128" Click="RemovingJourButton_Click" Height="47" VerticalAlignment="Top"/>
+                    <Button x:Name="button_Copy10" Content="Обновить" HorizontalAlignment="Left" Height="50" Margin="647,12,0,0" VerticalAlignment="Top" Width="129" Click="UpdateButton_Click" d:LayoutOverrides="VerticalAlignment"/>
+                    <DataGrid x:Name="JourDataGrid" Margin="2,2,150,2"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

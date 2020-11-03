@@ -11,13 +11,24 @@
             <TabItem Header="Книги">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="DataGridBook" HorizontalAlignment="Left" Height="371" VerticalAlignment="Top" Width="637" CanUserAddRows="False" CanUserDeleteRows="False"/>
-                    <Button x:Name="button" Content="Бронировать" HorizontalAlignment="Left" Height="60" Margin="647,15,0,0" VerticalAlignment="Top" Width="129"/>
+                    <Button x:Name="button" Content="Бронировать" HorizontalAlignment="Left" Height="60" Margin="647,15,0,0" VerticalAlignment="Top" Width="129" Click="BookButton_Click"/>
                     <Button x:Name="button_Copy" Content="Выход" HorizontalAlignment="Left" Height="60" Margin="647,306,0,0" VerticalAlignment="Top" Width="129" Click="ExitButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="История">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid1" HorizontalAlignment="Left" Height="381" VerticalAlignment="Top" Width="786" CanUserAddRows="False" CanUserDeleteRows="False"/>
+                    <DataGrid x:Name="HistoryDataGrid" HorizontalAlignment="Left" Height="381" VerticalAlignment="Top" Width="637" CanUserAddRows="False" CanUserDeleteRows="False" RenderTransformOrigin="0.5,0.5">
+                        <DataGrid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.311"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </DataGrid.RenderTransform>
+                    </DataGrid>
+                    <Button x:Name="button1" Content="Обновить" HorizontalAlignment="Right" Margin="0,19,8,0" VerticalAlignment="Top" Width="127" Height="54" Click="UpdateButton_Click"/>
+                    <Button x:Name="button1_Copy" Content="Выход" HorizontalAlignment="Right" Margin="0,0,8,19" VerticalAlignment="Bottom" Width="130" Height="47" Click="ExitButton_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

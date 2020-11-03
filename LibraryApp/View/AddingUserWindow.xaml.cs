@@ -20,25 +20,21 @@ namespace LibraryApp.View
     /// </summary>
     public partial class AddingWindow : Window
     {
-        List<string> role = new List<string>() { "Библиотекарь", "Читатель" };
         Readers _readers = new Readers();
         Users _user = new Users();
-        public AddingWindow()
+        public AddingWindow(string role)
         {
             InitializeComponent();
-            RoleComboBox.ItemsSource = role;
-            RoleComboBox.SelectedIndex = 0;
+            _user.Role = role;
         }
-        public AddingWindow(Users user)
+        public AddingWindow(Users user, string role)
         {
             InitializeComponent();
             _user.Id = user.Id;
-            RoleComboBox.ItemsSource = role;
-            RoleComboBox.SelectedIndex = 0;
+            _user.Role = role;
             LoginTextBox.Text=user.Login;
             PasswordTextBox.Text = user.Password;
             BlocCheckBox.IsChecked = user.IsBlocked;
-            RoleComboBox.SelectedIndex = 0;
             _readers = LibraryDBEntities.GetContext().Readers.FirstOrDefault(r => r.IdUser == user.Id);
             TelephoneTextBox.Text = _readers.Telephone;
             FIOTextBox.Text = _readers.FIO;
@@ -53,7 +49,6 @@ namespace LibraryApp.View
             _user.Login = LoginTextBox.Text;
             _user.Password = PasswordTextBox.Text;
             _user.IsBlocked = (bool)BlocCheckBox.IsChecked;
-            _user.Role = RoleComboBox.SelectedItem.ToString();
             _readers.FIO = FIOTextBox.Text;
             _readers.DateOfBirth = BirthDatePiker.SelectedDate;
             _readers.IsEmployee = (bool)EmpCheckBox.IsChecked;

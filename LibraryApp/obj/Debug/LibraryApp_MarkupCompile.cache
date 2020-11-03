@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\4-1P9\Desktop\LibraryApp-master\LibraryApp\obj\Debug\
+C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\
 LibraryApp
 none
 false
 DEBUG;TRACE
-C:\Users\4-1P9\Desktop\LibraryApp-master\LibraryApp\App.xaml
-71511256769
-2-382602433
-22420004715
-18-143480191
-MainWindow.xaml;View\AddingUserWindow.xaml;View\AdministratorWindow.xaml;View\LibrarianWindow.xaml;View\PersonalDataWindow.xaml;View\ReaderWindow.xaml;View\RegistrationWindow.xaml;
+C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\App.xaml
+91650771172
+2482335943
+201076517999
+18-1609269515
+MainWindow.xaml;View\AddingBookWindow.xaml;View\AddingUserWindow.xaml;View\AdministratorWindow.xaml;View\JournalWindow.xaml;View\LibrarianWindow.xaml;View\PersonalDataWindow.xaml;View\ReaderWindow.xaml;View\RegistrationWindow.xaml;
 
-True
+False
 
