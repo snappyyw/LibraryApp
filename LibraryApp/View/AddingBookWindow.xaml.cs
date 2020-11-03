@@ -61,10 +61,11 @@ namespace LibraryApp.View
                 error.AppendLine("Укажите Название");
             if (string.IsNullOrEmpty(_books.Genre))
                 error.AppendLine("Укажите жанр");
-            if (_books.PublicationDate==0)
-                error.AppendLine("Укажите дату");
             if (error.Length > 0)
+            {
                 MessageBox.Show(error.ToString());
+                return;
+            }
             try
             {
                 if (_books.Id != 0)

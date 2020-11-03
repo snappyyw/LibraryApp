@@ -40,7 +40,10 @@ namespace LibraryApp.View
             if (string.IsNullOrEmpty(users.Password))
                 error.AppendLine("Укажите пароль");
             if (error.Length > 0)
+            {
                 MessageBox.Show(error.ToString());
+                return;
+            }
             try
             {
                 LibraryDBEntities.GetContext().Users.Add(users);

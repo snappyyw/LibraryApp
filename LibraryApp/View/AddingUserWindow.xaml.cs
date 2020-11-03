@@ -60,8 +60,13 @@ namespace LibraryApp.View
                 error.AppendLine("Укажите логин");
             if (string.IsNullOrEmpty(_user.Password))
                 error.AppendLine("Укажите пароль");
+            if (_readers.ReaderRating == 0)
+                error.AppendLine("Укажите рейтинг");
             if (error.Length > 0)
+            {
                 MessageBox.Show(error.ToString());
+                return;
+            }
             try
             {
                if(_user.Id != 0)

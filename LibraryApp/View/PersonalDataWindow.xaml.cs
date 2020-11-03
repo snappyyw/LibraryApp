@@ -42,7 +42,11 @@ namespace LibraryApp.View
             if (string.IsNullOrEmpty(readers.FIO))
                 error.AppendLine("Укажите FIO");
             if (error.Length > 0)
+            {
                 MessageBox.Show(error.ToString());
+                return;
+            }
+            
             try
             {
                 LibraryDBEntities.GetContext().Readers.Add(readers);

@@ -20,7 +20,7 @@
         <CheckBox x:Name="EmpCheckBox" Content="Сотрудник" HorizontalAlignment="Right" Margin="0,353,302,91" Width="112"/>
         <TextBox x:Name="FIOTextBox" Height="31" Margin="128,121,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <TextBox x:Name="TelephoneTextBox" Height="31" Margin="128,157,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <TextBox x:Name="RatingTextBox" Height="31" Margin="128,192,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
+        <TextBox x:Name="RatingTextBox" Height="31" Margin="128,192,96,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
         <DatePicker Name="BirthDatePiker" HorizontalAlignment="Left" Height="27" Margin="176,273,0,0" VerticalAlignment="Top" Width="151"/>
 
     </Grid>
