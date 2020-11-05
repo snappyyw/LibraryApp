@@ -36,35 +36,58 @@ namespace LibraryApp.View
 
         private void EditJourButton_Click(object sender, RoutedEventArgs e)
         {
-            Journal journal = LibraryDBEntities.GetContext().Journal.FirstOrDefault(p=>p.Id==_id);
-            journal.BookingStartDate =(DateTime) DateStart.SelectedDate;
-            journal.BookingEndDate = (DateTime)DateEnd.SelectedDate;
-            journal.BookingStatus = StatusComboBox.SelectedItem.ToString();
-            journal.ReservationCode =int.Parse( CodeTextBox.Text);
+            if (ModelCheck())
+            {
+                Journal journal = LibraryDBEntities.GetContext().Journal.FirstOrDefault(p => p.Id == _id);
+                journal.BookingStartDate = (DateTime)DateStart.SelectedDate;
+                journal.BookingEndDate = (DateTime)DateEnd.SelectedDate;
+                journal.BookingStatus = StatusComboBox.SelectedItem.ToString();
+                journal.ReservationCode = int.Parse(CodeTextBox.Text);
 
-            if(journal.BookingStatus == "Возвращено")
-            {
-                Readers readers = LibraryDBEntities.GetContext().Readers.FirstOrDefault(p => p.Id == journal.IdReader);
-                if (journal.BookingEndDate < DateTime.Now)
+                if (journal.BookingStatus == "Возвращено")
                 {
-                    Books books = LibraryDBEntities.GetContext().Books.FirstOrDefault(p => p.Id == journal.IdBook);
-                    
+                    Readers readers = LibraryDBEntities.GetContext().Readers.FirstOrDefault(p => p.Id == journal.IdReader);
+                    if (journal.BookingEndDate < DateTime.Now)
+                    {
+                        Books books = LibraryDBEntities.GetContext().Books.FirstOrDefault(p => p.Id == journal.IdBook);
 
-                    readers.ReaderRating = readers.ReaderRating - books.PenaltyPoint;
+
+                        readers.ReaderRating = readers.ReaderRating - books.PenaltyPoint;
+                    }
+                    else
+                    {
+                        readers.ReaderRating = readers.ReaderRating + 1;
+                    }
                 }
-                else
+                try
                 {
-                    readers.ReaderRating = readers.ReaderRating+1;
+                    LibraryDBEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные изменены");
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
                 }
             }
-            try
+        }
+        private bool ModelCheck()
+        {
+            StringBuilder error = new StringBuilder();
+            int a;
+            if (DateStart.SelectedDate == null)
+                error.AppendLine("Укажите дату начала");
+            if (DateEnd.SelectedDate == null)
+                error.AppendLine("Укажите дату конца");
+            if (!int.TryParse(CodeTextBox.Text, out a))
+                error.AppendLine("Укажите код");
+            if (error.Length > 0)
             {
-                LibraryDBEntities.GetContext().SaveChanges();
+                MessageBox.Show(error.ToString());
+                return false;
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            else
+                return true;
         }
     }
 }

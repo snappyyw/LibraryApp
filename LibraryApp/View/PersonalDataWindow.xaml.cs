@@ -29,37 +29,46 @@ namespace LibraryApp.View
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            Readers readers = new Readers
+            if (ModelCheck())
             {
-                FIO = FioTextBox.Text,
-                Telephone = TelephoneTextBox.Text,
-                ReaderRating = 5,
-                IsEmployee = (bool)EmpCheckBox.IsChecked,
-                DateOfBirth = Date.SelectedDate,
-                IdUser = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Login == _login).Id
-            };
+                Readers readers = new Readers
+                {
+                    FIO = FioTextBox.Text,
+                    Telephone = TelephoneTextBox.Text,
+                    ReaderRating = 5,
+                    IsEmployee = (bool)EmpCheckBox.IsChecked,
+                    DateOfBirth = Date.SelectedDate,
+                    IdUser = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Login == _login).Id
+                };
+                try
+                {
+                    LibraryDBEntities.GetContext().Readers.Add(readers);
+                    LibraryDBEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Аккаунт создан");
+                    ReaderWindow readerWindow = new ReaderWindow(readers.IdUser);
+                    readerWindow.Show();
+
+                    this.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+        private bool ModelCheck()
+        {
             StringBuilder error = new StringBuilder();
-            if (string.IsNullOrEmpty(readers.FIO))
+            if (FioTextBox.Text == "")
                 error.AppendLine("Укажите FIO");
             if (error.Length > 0)
             {
                 MessageBox.Show(error.ToString());
-                return;
+                return false;
             }
-            
-            try
-            {
-                LibraryDBEntities.GetContext().Readers.Add(readers);
-                LibraryDBEntities.GetContext().SaveChanges();
-                ReaderWindow readerWindow = new ReaderWindow(readers.IdUser);
-                readerWindow.Show();
-                this.Close();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            else
+                return true;
         }
     }
 }

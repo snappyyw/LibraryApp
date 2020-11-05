@@ -27,33 +27,27 @@ namespace LibraryApp.View
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            Users users = new Users
+            if (ModelCheck())
             {
-                IsBlocked = false,
-                Login = LoginTextBox.Text,
-                Role = "Читатель",
-                Password = PasswordTextBox.Text,
-            };
-            StringBuilder error = new StringBuilder();
-            if (string.IsNullOrEmpty(users.Login))
-                error.AppendLine("Укажите логин");
-            if (string.IsNullOrEmpty(users.Password))
-                error.AppendLine("Укажите пароль");
-            if (error.Length > 0)
-            {
-                MessageBox.Show(error.ToString());
-                return;
-            }
-            try
-            {
-                LibraryDBEntities.GetContext().Users.Add(users);
-                LibraryDBEntities.GetContext().SaveChanges();
-                PersonalDataWindow personalDataWindow = new PersonalDataWindow(users.Login);
-                personalDataWindow.Show();
-                this.Close();
-            }
-            catch (Exception ex){
-                MessageBox.Show(ex.ToString());
+                Users users = new Users
+                {
+                    IsBlocked = false,
+                    Login = LoginTextBox.Text,
+                    Role = "Читатель",
+                    Password = PasswordTextBox.Text,
+                };
+                try
+                {
+                    LibraryDBEntities.GetContext().Users.Add(users);
+                    LibraryDBEntities.GetContext().SaveChanges();
+                    PersonalDataWindow personalDataWindow = new PersonalDataWindow(users.Login);
+                    personalDataWindow.Show();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
             
         }
@@ -86,6 +80,21 @@ namespace LibraryApp.View
         {
             label1.Foreground = System.Windows.Media.Brushes.Black;
             label2.Content = "";
+        }
+        private bool ModelCheck()
+        {
+            StringBuilder error = new StringBuilder();
+            if (LoginTextBox.Text=="")
+                error.AppendLine("Укажите логин");
+            if (PasswordTextBox.Text=="")
+                error.AppendLine("Укажите пароль");
+            if (error.Length > 0)
+            {
+                MessageBox.Show(error.ToString());
+                return false;
+            }
+            else
+                return true;
         }
     }
 }

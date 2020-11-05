@@ -46,55 +46,67 @@ namespace LibraryApp.View
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            _user.Login = LoginTextBox.Text;
-            _user.Password = PasswordTextBox.Text;
-            _user.IsBlocked = (bool)BlocCheckBox.IsChecked;
-            _readers.FIO = FIOTextBox.Text;
-            _readers.DateOfBirth = BirthDatePiker.SelectedDate;
-            _readers.IsEmployee = (bool)EmpCheckBox.IsChecked;
-            _readers.ReaderRating =int.Parse(RatingTextBox.Text);
-            _readers.Telephone = TelephoneTextBox.Text;
+            if (ModelCheck())
+            {
+                _user.Login = LoginTextBox.Text;
+                _user.Password = PasswordTextBox.Text;
+                _user.IsBlocked = (bool)BlocCheckBox.IsChecked;
+                _readers.FIO = FIOTextBox.Text;
+                _readers.DateOfBirth = BirthDatePiker.SelectedDate;
+                _readers.IsEmployee = (bool)EmpCheckBox.IsChecked;
+                _readers.ReaderRating = int.Parse(RatingTextBox.Text);
+                _readers.Telephone = TelephoneTextBox.Text;
 
+                try
+                {
+                    if (_user.Id != 0)
+                    {
+                        Users tempUser = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Id == _user.Id);
+                        tempUser.Login = _user.Login;
+                        tempUser.Password = _user.Password;
+                        tempUser.Role = _user.Role;
+                        tempUser.IsBlocked = _user.IsBlocked;
+                        LibraryDBEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Данные изменены");
+                    }
+                    else
+                    {
+                        LibraryDBEntities.GetContext().Users.Add(_user);
+                        LibraryDBEntities.GetContext().SaveChanges();
+                        Users users = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Login == _user.Login);
+                        _readers.IdUser = users.Id;
+                        LibraryDBEntities.GetContext().Readers.Add(_readers);
+                        LibraryDBEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Данные добавлены");
+                    }
+                    this.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+
+        }
+        private bool ModelCheck()
+        {
             StringBuilder error = new StringBuilder();
-            if (string.IsNullOrEmpty(_user.Login))
+            int a;
+            if (LoginTextBox.Text=="")
                 error.AppendLine("Укажите логин");
-            if (string.IsNullOrEmpty(_user.Password))
+            if (PasswordTextBox.Text=="")
                 error.AppendLine("Укажите пароль");
-            if (_readers.ReaderRating == 0)
+            if (!int.TryParse(RatingTextBox.Text, out a))
                 error.AppendLine("Укажите рейтинг");
             if (error.Length > 0)
             {
                 MessageBox.Show(error.ToString());
-                return;
+                return false;
             }
-            try
-            {
-               if(_user.Id != 0)
-                {
-                    Users tempUser = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Id == _user.Id);
-                    tempUser.Login = _user.Login;
-                    tempUser.Password = _user.Password;
-                    tempUser.Role = _user.Role;
-                    tempUser.IsBlocked = _user.IsBlocked;
-                    LibraryDBEntities.GetContext().SaveChanges();
-                }
-                else
-                {
-                    LibraryDBEntities.GetContext().Users.Add(_user);
-                    LibraryDBEntities.GetContext().SaveChanges();
-                    Users users = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Login == _user.Login);
-                    _readers.IdUser = users.Id;
-                    LibraryDBEntities.GetContext().Readers.Add(_readers);
-                    LibraryDBEntities.GetContext().SaveChanges();
-                }
-               this.Close();
-
-            }
-            catch(Exception ex) {
-                MessageBox.Show(ex.ToString());
-            }
-
-
+            else
+                return true;
         }
     }
 }

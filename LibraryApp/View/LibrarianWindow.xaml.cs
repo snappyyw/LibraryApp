@@ -68,7 +68,7 @@ namespace LibraryApp.View
                 try
                 {
                     LibraryDBEntities.GetContext().Journal.Add(journal);
-                    MessageBox.Show(_code + " Ваш талон");
+                    MessageBox.Show("Ваш талон "+_code );
                     LibraryDBEntities.GetContext().SaveChanges();
                 }
                 catch (Exception ex)
@@ -112,9 +112,12 @@ namespace LibraryApp.View
                 {
                     Users users = (Users)DataGridReader.SelectedItems[0];
                     var reader = LibraryDBEntities.GetContext().Readers.FirstOrDefault(r => r.IdUser == users.Id);
-                    LibraryDBEntities.GetContext().Readers.Remove(reader);
-                    LibraryDBEntities.GetContext().Users.Remove(users);
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        LibraryDBEntities.GetContext().Readers.Remove(reader);
+                        LibraryDBEntities.GetContext().Users.Remove(users);
+                        LibraryDBEntities.GetContext().SaveChanges();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -130,7 +133,8 @@ namespace LibraryApp.View
             {
                 Books books =(Books) DataGridBook.SelectedItems[0];
                 books.IsBlocked = true;
-                LibraryDBEntities.GetContext().SaveChanges();
+                if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    LibraryDBEntities.GetContext().SaveChanges();
             }
         }
 
@@ -152,7 +156,8 @@ namespace LibraryApp.View
                 {
                     Journal journal = (Journal)JourDataGrid.SelectedItems[0];
                     LibraryDBEntities.GetContext().Journal.Remove(journal);
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        LibraryDBEntities.GetContext().SaveChanges();
                 }
                 catch (Exception ex)
                 {

@@ -53,7 +53,8 @@ namespace LibraryApp.View
                 {
                     Users users = (Users)DataGridLibrarian.SelectedItems[0];
                     LibraryDBEntities.GetContext().Users.Remove(users);
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        LibraryDBEntities.GetContext().SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -72,9 +73,12 @@ namespace LibraryApp.View
                 {
                     Users users = (Users)DataGridReader.SelectedItems[0];
                     var reader = LibraryDBEntities.GetContext().Readers.FirstOrDefault(r => r.IdUser == users.Id);
-                    LibraryDBEntities.GetContext().Readers.Remove(reader);
-                    LibraryDBEntities.GetContext().Users.Remove(users);
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        LibraryDBEntities.GetContext().Readers.Remove(reader);
+                        LibraryDBEntities.GetContext().Users.Remove(users);
+                        LibraryDBEntities.GetContext().SaveChanges();
+                    }
                 }
                 catch (Exception ex)
                 {

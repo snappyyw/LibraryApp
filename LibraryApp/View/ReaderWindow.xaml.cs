@@ -45,7 +45,7 @@ namespace LibraryApp.View
                 try
                 {
                     LibraryDBEntities.GetContext().Journal.Add(journal);
-                    MessageBox.Show(_code + " Ваш талон");
+                    MessageBox.Show("Ваш талон "+_code);
                     LibraryDBEntities.GetContext().SaveChanges();
                 }
                 catch (Exception ex)
