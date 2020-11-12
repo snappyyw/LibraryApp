@@ -20,6 +20,7 @@ namespace LibraryApp.View
     /// </summary>
     public partial class PersonalDataWindow : Window
     {
+        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         string _login;
         public PersonalDataWindow(string login)
         {
@@ -38,12 +39,12 @@ namespace LibraryApp.View
                     ReaderRating = 5,
                     IsEmployee = (bool)EmpCheckBox.IsChecked,
                     DateOfBirth = Date.SelectedDate,
-                    IdUser = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Login == _login).Id
+                    IdUser = libraryDBEntities.Users.FirstOrDefault(u => u.Login == _login).Id
                 };
                 try
                 {
-                    LibraryDBEntities.GetContext().Readers.Add(readers);
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    libraryDBEntities.Readers.Add(readers);
+                    libraryDBEntities.SaveChanges();
                     MessageBox.Show("Аккаунт создан");
                     ReaderWindow readerWindow = new ReaderWindow(readers.IdUser);
                     readerWindow.Show();

@@ -15,16 +15,9 @@ namespace LibraryApp.Model
     
     public partial class LibraryDBEntities : DbContext
     {
-        private static LibraryDBEntities context;
         public LibraryDBEntities()
             : base("name=LibraryDBEntities")
         {
-        }
-        public static LibraryDBEntities GetContext()
-        {
-            if (context == null)
-                context = new LibraryDBEntities();
-            return context;
         }
 
 

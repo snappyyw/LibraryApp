@@ -20,6 +20,7 @@ namespace LibraryApp.View
     /// </summary>
     public partial class JournalWindow : Window
     {
+        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         List<string> status = new List<string>() { "Ожидает подтверждения", "Принято", "Отказано", "Кинга передана читателю", "Возвращено" };
         int _id;
         public JournalWindow(Journal journal)
@@ -38,7 +39,7 @@ namespace LibraryApp.View
         {
             if (ModelCheck())
             {
-                Journal journal = LibraryDBEntities.GetContext().Journal.FirstOrDefault(p => p.Id == _id);
+                Journal journal = libraryDBEntities.Journal.FirstOrDefault(p => p.Id == _id);
                 journal.BookingStartDate = (DateTime)DateStart.SelectedDate;
                 journal.BookingEndDate = (DateTime)DateEnd.SelectedDate;
                 journal.BookingStatus = StatusComboBox.SelectedItem.ToString();
@@ -46,10 +47,10 @@ namespace LibraryApp.View
 
                 if (journal.BookingStatus == "Возвращено")
                 {
-                    Readers readers = LibraryDBEntities.GetContext().Readers.FirstOrDefault(p => p.Id == journal.IdReader);
+                    Readers readers = libraryDBEntities.Readers.FirstOrDefault(p => p.Id == journal.IdReader);
                     if (journal.BookingEndDate < DateTime.Now)
                     {
-                        Books books = LibraryDBEntities.GetContext().Books.FirstOrDefault(p => p.Id == journal.IdBook);
+                        Books books = libraryDBEntities.Books.FirstOrDefault(p => p.Id == journal.IdBook);
 
 
                         readers.ReaderRating = readers.ReaderRating - books.PenaltyPoint;
@@ -61,7 +62,7 @@ namespace LibraryApp.View
                 }
                 try
                 {
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    libraryDBEntities.SaveChanges();
                     MessageBox.Show("Данные изменены");
                     this.Close();
                 }

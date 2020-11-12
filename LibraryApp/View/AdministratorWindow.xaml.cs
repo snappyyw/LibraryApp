@@ -20,11 +20,12 @@ namespace LibraryApp.View
     /// </summary>
     public partial class AdministratorWindow : Window
     {
+        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         public AdministratorWindow()
         {
             InitializeComponent();
-            DataGridReader.ItemsSource = LibraryDBEntities.GetContext().Users.Where(p => p.Role == "Читатель").ToList();
-            DataGridLibrarian.ItemsSource = LibraryDBEntities.GetContext().Users.Where(p => p.Role == "Библиотекарь").ToList();
+            DataGridReader.ItemsSource = libraryDBEntities.Users.Where(p => p.Role == "Читатель").ToList();
+            DataGridLibrarian.ItemsSource = libraryDBEntities.Users.Where(p => p.Role == "Библиотекарь").ToList();
         }
 
         private void AddingReaderButton_Click(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace LibraryApp.View
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            AuthorizationWindow mainWindow = new AuthorizationWindow();
             mainWindow.Show();
             this.Close();
         }
@@ -52,9 +53,9 @@ namespace LibraryApp.View
                 try
                 {
                     Users users = (Users)DataGridLibrarian.SelectedItems[0];
-                    LibraryDBEntities.GetContext().Users.Remove(users);
+                    libraryDBEntities.Users.Remove(users);
                     if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                        LibraryDBEntities.GetContext().SaveChanges();
+                        libraryDBEntities.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -72,12 +73,12 @@ namespace LibraryApp.View
                 try
                 {
                     Users users = (Users)DataGridReader.SelectedItems[0];
-                    var reader = LibraryDBEntities.GetContext().Readers.FirstOrDefault(r => r.IdUser == users.Id);
+                    var reader = libraryDBEntities.Readers.FirstOrDefault(r => r.IdUser == users.Id);
                     if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        LibraryDBEntities.GetContext().Readers.Remove(reader);
-                        LibraryDBEntities.GetContext().Users.Remove(users);
-                        LibraryDBEntities.GetContext().SaveChanges();
+                        libraryDBEntities.Readers.Remove(reader);
+                        libraryDBEntities.Users.Remove(users);
+                        libraryDBEntities.SaveChanges();
                     }
                 }
                 catch (Exception ex)
@@ -90,8 +91,8 @@ namespace LibraryApp.View
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            DataGridReader.ItemsSource = LibraryDBEntities.GetContext().Users.Where(p => p.Role == "Читатель").ToList();
-            DataGridLibrarian.ItemsSource = LibraryDBEntities.GetContext().Users.Where(p => p.Role == "Библиотекарь").ToList();
+            DataGridReader.ItemsSource = libraryDBEntities.Users.Where(p => p.Role == "Читатель").ToList();
+            DataGridLibrarian.ItemsSource = libraryDBEntities.Users.Where(p => p.Role == "Библиотекарь").ToList();
         }
 
         private void ReaderEditButton_Click(object sender, RoutedEventArgs e)

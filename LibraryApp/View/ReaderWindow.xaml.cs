@@ -22,13 +22,14 @@ namespace LibraryApp.View
     {
         int _id;
         int _code = new Random().Next(100, 999);
+        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         public ReaderWindow(int id)
         {
-            Readers readers = LibraryDBEntities.GetContext().Readers.FirstOrDefault(p => p.IdUser == id);
+            Readers readers = libraryDBEntities.Readers.FirstOrDefault(p => p.IdUser == id);
             _id = readers.Id;
             InitializeComponent();
-            DataGridBook.ItemsSource = LibraryDBEntities.GetContext().Books.Where(p => p.PublishedBooks == true&&p.IsBlocked==false).ToList();
-            HistoryDataGrid.ItemsSource = LibraryDBEntities.GetContext().Journal.Where(p => p.IdReader == _id).ToList();
+            DataGridBook.ItemsSource = libraryDBEntities.Books.Where(p => p.PublishedBooks == true&&p.IsBlocked==false).ToList();
+            HistoryDataGrid.ItemsSource = libraryDBEntities.Journal.Where(p => p.IdReader == _id).ToList();
         }
 
         private void BookButton_Click(object sender, RoutedEventArgs e)
@@ -44,9 +45,9 @@ namespace LibraryApp.View
                 journal.IdReader = _id;
                 try
                 {
-                    LibraryDBEntities.GetContext().Journal.Add(journal);
+                    libraryDBEntities.Journal.Add(journal);
                     MessageBox.Show("Ваш талон "+_code);
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    libraryDBEntities.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -56,14 +57,14 @@ namespace LibraryApp.View
         }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            AuthorizationWindow mainWindow = new AuthorizationWindow();
             mainWindow.Show();
             this.Close();
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            HistoryDataGrid.ItemsSource = LibraryDBEntities.GetContext().Journal.Where(p => p.IdReader == _id).ToList();
+            HistoryDataGrid.ItemsSource = libraryDBEntities.Journal.Where(p => p.IdReader == _id).ToList();
         }
     }
 }

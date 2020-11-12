@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\App.xaml
-91650771172
+9-86614358
 2482335943
-201076517999
+20-46327780
 18-1609269515
-MainWindow.xaml;View\AddingBookWindow.xaml;View\AddingUserWindow.xaml;View\AdministratorWindow.xaml;View\JournalWindow.xaml;View\LibrarianWindow.xaml;View\PersonalDataWindow.xaml;View\ReaderWindow.xaml;View\RegistrationWindow.xaml;
+View\AuthorizationWindow.xaml;View\AddingBookWindow.xaml;View\AddingUserWindow.xaml;View\AdministratorWindow.xaml;View\JournalWindow.xaml;View\LibrarianWindow.xaml;View\PersonalDataWindow.xaml;View\ReaderWindow.xaml;View\RegistrationWindow.xaml;
 
 False
 

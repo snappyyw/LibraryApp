@@ -20,6 +20,7 @@ namespace LibraryApp.View
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -38,8 +39,8 @@ namespace LibraryApp.View
                 };
                 try
                 {
-                    LibraryDBEntities.GetContext().Users.Add(users);
-                    LibraryDBEntities.GetContext().SaveChanges();
+                    libraryDBEntities.Users.Add(users);
+                    libraryDBEntities.SaveChanges();
                     PersonalDataWindow personalDataWindow = new PersonalDataWindow(users.Login);
                     personalDataWindow.Show();
                     this.Close();
@@ -65,7 +66,7 @@ namespace LibraryApp.View
 
         private void labelBack_MouseEnter(object sender, MouseEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            AuthorizationWindow mainWindow = new AuthorizationWindow();
             mainWindow.Show();
             this.Close();
         }

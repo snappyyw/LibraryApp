@@ -6,12 +6,10 @@ C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\bin\Debug\EntityFramework.
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\bin\Debug\EntityFramework.xml
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\bin\Debug\ru\EntityFramework.resources.dll
-C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\MainWindow.g.cs
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\App.g.cs
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp_Content.g.cs
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp_MarkupCompile.cache
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp_MarkupCompile.lref
-C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\MainWindow.baml
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.g.resources
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.Properties.Resources.resources
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.csproj.GenerateResource.cache
@@ -19,7 +17,6 @@ C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.cspro
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.csproj.CopyComplete
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.exe
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.pdb
-C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.csprojAssemblyReference.cache
 C:\Users\4-1P9\Downloads\LibraryApp-main\LibraryApp\bin\Debug\LibraryApp.exe.config
 C:\Users\4-1P9\Downloads\LibraryApp-main\LibraryApp\bin\Debug\LibraryApp.exe
 C:\Users\4-1P9\Downloads\LibraryApp-main\LibraryApp\bin\Debug\LibraryApp.pdb
@@ -102,3 +99,5 @@ C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\PersonalDat
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\ReaderWindow.baml
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\RegistrationWindow.baml
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\JournalWindow.baml
+C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\AuthorizationWindow.g.cs
+C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\AuthorizationWindow.baml

@@ -20,6 +20,7 @@ namespace LibraryApp.View
     /// </summary>
     public partial class AddingBookWindow : Window
     {
+        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         Books _books = new Books();
         public AddingBookWindow()
         {
@@ -60,7 +61,7 @@ namespace LibraryApp.View
                 {
                     if (_books.Id != 0)
                     {
-                        Books tempBook = LibraryDBEntities.GetContext().Books.FirstOrDefault(u => u.Id == _books.Id);
+                        Books tempBook = libraryDBEntities.Books.FirstOrDefault(u => u.Id == _books.Id);
                         tempBook.Author = AuthorTextBox.Text;
                         tempBook.Description = DiskripTextBox.Text;
                         tempBook.Genre = GenreTextBox.Text;
@@ -71,12 +72,12 @@ namespace LibraryApp.View
                         tempBook.PublishedBooks = (bool)IsPublicCheckBox.IsChecked;
                         tempBook.Tags = TagsTextBox.Text;
                         MessageBox.Show("Данные изменены");
-                        LibraryDBEntities.GetContext().SaveChanges();
+                        libraryDBEntities.SaveChanges();
                     }
                     else
                     {
-                        LibraryDBEntities.GetContext().Books.Add(_books);
-                        LibraryDBEntities.GetContext().SaveChanges();
+                        libraryDBEntities.Books.Add(_books);
+                        libraryDBEntities.SaveChanges();
                         MessageBox.Show("Данные добавлены");
                     }
                     this.Close();

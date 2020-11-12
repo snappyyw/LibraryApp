@@ -20,6 +20,7 @@ namespace LibraryApp.View
     /// </summary>
     public partial class AddingWindow : Window
     {
+        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         Readers _readers = new Readers();
         Users _user = new Users();
         public AddingWindow(string role)
@@ -35,7 +36,7 @@ namespace LibraryApp.View
             LoginTextBox.Text=user.Login;
             PasswordTextBox.Text = user.Password;
             BlocCheckBox.IsChecked = user.IsBlocked;
-            _readers = LibraryDBEntities.GetContext().Readers.FirstOrDefault(r => r.IdUser == user.Id);
+            _readers = libraryDBEntities.Readers.FirstOrDefault(r => r.IdUser == user.Id);
             TelephoneTextBox.Text = _readers.Telephone;
             FIOTextBox.Text = _readers.FIO;
             BirthDatePiker.SelectedDate = _readers.DateOfBirth;
@@ -61,22 +62,22 @@ namespace LibraryApp.View
                 {
                     if (_user.Id != 0)
                     {
-                        Users tempUser = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Id == _user.Id);
+                        Users tempUser = libraryDBEntities.Users.FirstOrDefault(u => u.Id == _user.Id);
                         tempUser.Login = _user.Login;
                         tempUser.Password = _user.Password;
                         tempUser.Role = _user.Role;
                         tempUser.IsBlocked = _user.IsBlocked;
-                        LibraryDBEntities.GetContext().SaveChanges();
+                        libraryDBEntities.SaveChanges();
                         MessageBox.Show("Данные изменены");
                     }
                     else
                     {
-                        LibraryDBEntities.GetContext().Users.Add(_user);
-                        LibraryDBEntities.GetContext().SaveChanges();
-                        Users users = LibraryDBEntities.GetContext().Users.FirstOrDefault(u => u.Login == _user.Login);
+                        libraryDBEntities.Users.Add(_user);
+                        libraryDBEntities.SaveChanges();
+                        Users users = libraryDBEntities.Users.FirstOrDefault(u => u.Login == _user.Login);
                         _readers.IdUser = users.Id;
-                        LibraryDBEntities.GetContext().Readers.Add(_readers);
-                        LibraryDBEntities.GetContext().SaveChanges();
+                        libraryDBEntities.Readers.Add(_readers);
+                        libraryDBEntities.SaveChanges();
                         MessageBox.Show("Данные добавлены");
                     }
                     this.Close();
