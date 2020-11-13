@@ -65,6 +65,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logic\DBQuery.cs" />
+    <Compile Include="Logic\PassHelp.cs" />
     <Compile Include="Model\Books.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

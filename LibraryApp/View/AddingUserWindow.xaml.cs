@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace LibraryApp.View
     /// </summary>
     public partial class AddingWindow : Window
     {
+        PassHelp passHelp = new PassHelp();
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         Readers _readers = new Readers();
         Users _user = new Users();
@@ -50,7 +52,7 @@ namespace LibraryApp.View
             if (ModelCheck())
             {
                 _user.Login = LoginTextBox.Text;
-                _user.Password = PasswordTextBox.Text;
+                _user.Password = passHelp.HashPassword(PasswordTextBox.Text);
                 _user.IsBlocked = (bool)BlocCheckBox.IsChecked;
                 _readers.FIO = FIOTextBox.Text;
                 _readers.DateOfBirth = BirthDatePiker.SelectedDate;
@@ -64,7 +66,7 @@ namespace LibraryApp.View
                     {
                         Users tempUser = libraryDBEntities.Users.FirstOrDefault(u => u.Id == _user.Id);
                         tempUser.Login = _user.Login;
-                        tempUser.Password = _user.Password;
+                        tempUser.Password = passHelp.HashPassword(_user.Password);
                         tempUser.Role = _user.Role;
                         tempUser.IsBlocked = _user.IsBlocked;
                         libraryDBEntities.SaveChanges();

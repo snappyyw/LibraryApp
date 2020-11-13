@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace LibraryApp.View
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+
+        PassHelp passHelp = new PassHelp();
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         public RegistrationWindow()
         {
@@ -35,7 +38,7 @@ namespace LibraryApp.View
                     IsBlocked = false,
                     Login = LoginTextBox.Text,
                     Role = "Читатель",
-                    Password = PasswordTextBox.Text,
+                    Password =passHelp.HashPassword(PasswordTextBox.Text),
                 };
                 try
                 {
@@ -55,13 +58,7 @@ namespace LibraryApp.View
 
         private void CreatePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            Random random = new Random();
-            var partOne = Enumerable.Range(0, 1).Select(x => (char)random.Next('A', 'Z' + 1));
-            var partTwo = Enumerable.Range(0, 4).Select(x => (char)random.Next('a', 'z' + 1));
-            var partThree = Enumerable.Range(0, 3).Select(x => (char)random.Next('!', '/' + 1));
-            var partFour = Enumerable.Range(0,1).Select(x => (char)random.Next('0', '9' + 1));
-
-            PasswordTextBox.Text = string.Concat(partOne.Concat(partTwo).Concat(partThree).Concat(partFour));
+            PasswordTextBox.Text = passHelp.GeneratePass();
         }
 
         private void labelBack_MouseEnter(object sender, MouseEventArgs e)
