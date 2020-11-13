@@ -24,6 +24,7 @@ namespace LibraryApp.View
         PassHelp passHelp = new PassHelp();
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         Readers _readers = new Readers();
+         DBQueryHelp dBQuery = new DBQueryHelp();
         Users _user = new Users();
         public AddingWindow(string role)
         {
@@ -69,17 +70,12 @@ namespace LibraryApp.View
                         tempUser.Password = passHelp.HashPassword(_user.Password);
                         tempUser.Role = _user.Role;
                         tempUser.IsBlocked = _user.IsBlocked;
-                        libraryDBEntities.SaveChanges();
+                        dBQuery.Update(libraryDBEntities);
                         MessageBox.Show("Данные изменены");
                     }
                     else
                     {
-                        libraryDBEntities.Users.Add(_user);
-                        libraryDBEntities.SaveChanges();
-                        Users users = libraryDBEntities.Users.FirstOrDefault(u => u.Login == _user.Login);
-                        _readers.IdUser = users.Id;
-                        libraryDBEntities.Readers.Add(_readers);
-                        libraryDBEntities.SaveChanges();
+                        dBQuery.AddReaderAndUser(_readers,_user);
                         MessageBox.Show("Данные добавлены");
                     }
                     this.Close();

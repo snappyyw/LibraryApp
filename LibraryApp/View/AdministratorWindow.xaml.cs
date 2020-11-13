@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace LibraryApp.View
     public partial class AdministratorWindow : Window
     {
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
+        DBQueryHelp dBQuery = new DBQueryHelp();
         public AdministratorWindow()
         {
             InitializeComponent();
@@ -53,9 +55,11 @@ namespace LibraryApp.View
                 try
                 {
                     Users users = (Users)DataGridLibrarian.SelectedItems[0];
-                    libraryDBEntities.Users.Remove(users);
+                    var reader = libraryDBEntities.Readers.FirstOrDefault(r => r.IdUser == users.Id);
                     if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                        libraryDBEntities.SaveChanges();
+                    {
+                        dBQuery.RemovingUser(reader, users);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -76,9 +80,7 @@ namespace LibraryApp.View
                     var reader = libraryDBEntities.Readers.FirstOrDefault(r => r.IdUser == users.Id);
                     if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        libraryDBEntities.Readers.Remove(reader);
-                        libraryDBEntities.Users.Remove(users);
-                        libraryDBEntities.SaveChanges();
+                        dBQuery.RemovingUser(reader, users);
                     }
                 }
                 catch (Exception ex)

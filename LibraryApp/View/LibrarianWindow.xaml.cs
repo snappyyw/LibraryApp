@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace LibraryApp.View
     public partial class LibrarianWindow : Window
     {
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
+        DBQueryHelp dBQueryHelp = new DBQueryHelp();
         int _id;
         int _code = new Random().Next(100, 999);
         public LibrarianWindow(int id)
@@ -49,10 +51,10 @@ namespace LibraryApp.View
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            DataGridBook.ItemsSource = libraryDBEntities.Books.Where(p => p.IsBlocked == false).ToList();
+            DataGridBook.ItemsSource = new LibraryDBEntities().Books.Where(p => p.IsBlocked == false).ToList();
             HistoryDataGrid.ItemsSource = libraryDBEntities.Journal.Where(p => p.IdReader == _id).ToList();
             DataGridReader.ItemsSource = libraryDBEntities.Users.Where(p => p.Role == "Читатель").ToList();
-            JourDataGrid.ItemsSource = libraryDBEntities.Journal.ToList();
+            JourDataGrid.ItemsSource =new LibraryDBEntities().Journal.ToList();
         }
 
         private void BookButton_Click(object sender, RoutedEventArgs e)
@@ -115,9 +117,7 @@ namespace LibraryApp.View
                     var reader = libraryDBEntities.Readers.FirstOrDefault(r => r.IdUser == users.Id);
                     if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        libraryDBEntities.Readers.Remove(reader);
-                        libraryDBEntities.Users.Remove(users);
-                        libraryDBEntities.SaveChanges();
+                        dBQueryHelp.RemovingUser(reader, users);
                     }
                 }
                 catch (Exception ex)
@@ -133,9 +133,9 @@ namespace LibraryApp.View
             if (DataGridBook.SelectedItems.Count > 0)
             {
                 Books books =(Books) DataGridBook.SelectedItems[0];
-                books.IsBlocked = true;
                 if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    libraryDBEntities.SaveChanges();
+                    books.IsBlocked = true;
+                dBQueryHelp.Update(libraryDBEntities);
             }
         }
 
@@ -156,9 +156,8 @@ namespace LibraryApp.View
                 try
                 {
                     Journal journal = (Journal)JourDataGrid.SelectedItems[0];
-                    libraryDBEntities.Journal.Remove(journal);
                     if (MessageBox.Show("Удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                        libraryDBEntities.SaveChanges();
+                        dBQueryHelp.RemovingJournal(journal);
                 }
                 catch (Exception ex)
                 {

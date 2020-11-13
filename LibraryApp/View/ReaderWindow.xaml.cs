@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace LibraryApp.View
     /// </summary>
     public partial class ReaderWindow : Window
     {
+        DBQueryHelp dBQueryHelp = new DBQueryHelp();
         int _id;
         int _code = new Random().Next(100, 999);
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
@@ -45,9 +47,8 @@ namespace LibraryApp.View
                 journal.IdReader = _id;
                 try
                 {
-                    libraryDBEntities.Journal.Add(journal);
+                    dBQueryHelp.AddJournal(journal);
                     MessageBox.Show("Ваш талон "+_code);
-                    libraryDBEntities.SaveChanges();
                 }
                 catch (Exception ex)
                 {

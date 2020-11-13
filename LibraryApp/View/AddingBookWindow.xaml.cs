@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace LibraryApp.View
     public partial class AddingBookWindow : Window
     {
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
+        DBQueryHelp dBQuery = new DBQueryHelp();
         Books _books = new Books();
         public AddingBookWindow()
         {
@@ -71,13 +73,12 @@ namespace LibraryApp.View
                         tempBook.PublicationDate = int.Parse(DateTextBox.Text);
                         tempBook.PublishedBooks = (bool)IsPublicCheckBox.IsChecked;
                         tempBook.Tags = TagsTextBox.Text;
+                        dBQuery.Update(libraryDBEntities);
                         MessageBox.Show("Данные изменены");
-                        libraryDBEntities.SaveChanges();
                     }
                     else
                     {
-                        libraryDBEntities.Books.Add(_books);
-                        libraryDBEntities.SaveChanges();
+                        dBQuery.AddBook(_books);
                         MessageBox.Show("Данные добавлены");
                     }
                     this.Close();

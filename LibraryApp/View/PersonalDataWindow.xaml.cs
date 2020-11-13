@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace LibraryApp.View
     public partial class PersonalDataWindow : Window
     {
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
+        DBQueryHelp dBQueryHelp = new DBQueryHelp();
         string _login;
         public PersonalDataWindow(string login)
         {
@@ -43,8 +45,7 @@ namespace LibraryApp.View
                 };
                 try
                 {
-                    libraryDBEntities.Readers.Add(readers);
-                    libraryDBEntities.SaveChanges();
+                    dBQueryHelp.AddReader(readers);
                     MessageBox.Show("Аккаунт создан");
                     ReaderWindow readerWindow = new ReaderWindow(readers.IdUser);
                     readerWindow.Show();

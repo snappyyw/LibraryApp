@@ -1,4 +1,5 @@
-﻿using LibraryApp.Model;
+﻿using LibraryApp.Logic;
+using LibraryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace LibraryApp.View
     {
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         List<string> status = new List<string>() { "Ожидает подтверждения", "Принято", "Отказано", "Кинга передана читателю", "Возвращено" };
+        DBQueryHelp dBQueryHelp = new DBQueryHelp();
+        PointHelp pointHelp = new PointHelp();
         int _id;
         public JournalWindow(Journal journal)
         {
@@ -44,25 +47,10 @@ namespace LibraryApp.View
                 journal.BookingEndDate = (DateTime)DateEnd.SelectedDate;
                 journal.BookingStatus = StatusComboBox.SelectedItem.ToString();
                 journal.ReservationCode = int.Parse(CodeTextBox.Text);
-
-                if (journal.BookingStatus == "Возвращено")
-                {
-                    Readers readers = libraryDBEntities.Readers.FirstOrDefault(p => p.Id == journal.IdReader);
-                    if (journal.BookingEndDate < DateTime.Now)
-                    {
-                        Books books = libraryDBEntities.Books.FirstOrDefault(p => p.Id == journal.IdBook);
-
-
-                        readers.ReaderRating = readers.ReaderRating - books.PenaltyPoint;
-                    }
-                    else
-                    {
-                        readers.ReaderRating = readers.ReaderRating + 1;
-                    }
-                }
+                pointHelp.PenaltyPoint(journal);
                 try
                 {
-                    libraryDBEntities.SaveChanges();
+                    dBQueryHelp.Update(libraryDBEntities);
                     MessageBox.Show("Данные изменены");
                     this.Close();
                 }

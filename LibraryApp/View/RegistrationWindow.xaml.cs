@@ -23,7 +23,7 @@ namespace LibraryApp.View
     {
 
         PassHelp passHelp = new PassHelp();
-        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
+        DBQueryHelp dBQueryHelp = new DBQueryHelp();
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -42,8 +42,7 @@ namespace LibraryApp.View
                 };
                 try
                 {
-                    libraryDBEntities.Users.Add(users);
-                    libraryDBEntities.SaveChanges();
+                    dBQueryHelp.AddUser(users);
                     PersonalDataWindow personalDataWindow = new PersonalDataWindow(users.Login);
                     personalDataWindow.Show();
                     this.Close();
