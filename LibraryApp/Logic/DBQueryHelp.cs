@@ -39,19 +39,9 @@ namespace LibraryApp.Logic
             libraryDBEntities.Journal.Remove(journal);
             libraryDBEntities.SaveChanges();
         }
-        public void AddReader(Readers reader)
-        {
-            libraryDBEntities.Readers.Add(reader);
-            libraryDBEntities.SaveChanges();
-        }
         public void AddJournal(Journal journal)
         {
             libraryDBEntities.Journal.Add(journal);
-            libraryDBEntities.SaveChanges();
-        }
-        public void AddUser(Users users)
-        {
-            libraryDBEntities.Users.Add(users);
             libraryDBEntities.SaveChanges();
         }
     }

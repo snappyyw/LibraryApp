@@ -21,13 +21,12 @@ namespace LibraryApp.View
     /// </summary>
     public partial class PersonalDataWindow : Window
     {
-        LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         DBQueryHelp dBQueryHelp = new DBQueryHelp();
-        string _login;
-        public PersonalDataWindow(string login)
+        Users _user;
+        public PersonalDataWindow(Users user)
         {
             InitializeComponent();
-            _login = login;
+            _user = user;
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -41,15 +40,14 @@ namespace LibraryApp.View
                     ReaderRating = 5,
                     IsEmployee = (bool)EmpCheckBox.IsChecked,
                     DateOfBirth = Date.SelectedDate,
-                    IdUser = libraryDBEntities.Users.FirstOrDefault(u => u.Login == _login).Id
+                    IdUser = _user.Id
                 };
                 try
                 {
-                    dBQueryHelp.AddReader(readers);
+                    dBQueryHelp.AddReaderAndUser(readers,_user);
                     MessageBox.Show("Аккаунт создан");
                     ReaderWindow readerWindow = new ReaderWindow(readers.IdUser);
                     readerWindow.Show();
-
                     this.Close();
 
                 }

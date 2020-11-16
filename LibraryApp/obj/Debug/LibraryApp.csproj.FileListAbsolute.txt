@@ -101,3 +101,4 @@ C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\Registratio
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\JournalWindow.baml
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\AuthorizationWindow.g.cs
 C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\View\AuthorizationWindow.baml
+C:\Users\Виталик\Desktop\LibraryApp\LibraryApp\obj\Debug\LibraryApp.csprojAssemblyReference.cache

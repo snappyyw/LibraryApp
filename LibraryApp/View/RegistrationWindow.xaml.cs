@@ -23,7 +23,6 @@ namespace LibraryApp.View
     {
 
         PassHelp passHelp = new PassHelp();
-        DBQueryHelp dBQueryHelp = new DBQueryHelp();
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -38,19 +37,11 @@ namespace LibraryApp.View
                     IsBlocked = false,
                     Login = LoginTextBox.Text,
                     Role = "Читатель",
-                    Password =passHelp.HashPassword(PasswordTextBox.Text),
+                    Password = passHelp.HashPassword(PasswordTextBox.Text),
                 };
-                try
-                {
-                    dBQueryHelp.AddUser(users);
-                    PersonalDataWindow personalDataWindow = new PersonalDataWindow(users.Login);
-                    personalDataWindow.Show();
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                PersonalDataWindow personalDataWindow = new PersonalDataWindow(users);
+                personalDataWindow.Show();
+                this.Close();
             }
             
         }
