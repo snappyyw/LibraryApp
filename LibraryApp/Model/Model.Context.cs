@@ -19,16 +19,17 @@ namespace LibraryApp.Model
             : base("name=LibraryDBEntities")
         {
         }
-
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Books> Books { get; set; }
+        public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Journal> Journal { get; set; }
         public virtual DbSet<Readers> Readers { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

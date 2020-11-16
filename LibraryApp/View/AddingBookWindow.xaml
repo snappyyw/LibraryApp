@@ -21,12 +21,12 @@
         <TextBox x:Name="AuthorTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Margin="200,74,0,0"/>
         <TextBox x:Name="DiskripTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Margin="200,149,0,0"/>
         <TextBox x:Name="ImgTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Margin="200,186,0,0" d:LayoutOverrides="VerticalAlignment"/>
-        <TextBox x:Name="GenreTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Margin="200,227,0,0"/>
         <TextBox x:Name="InstancesTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="170" Margin="200,267,0,0"/>
         <TextBox x:Name="PointsTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="170" Margin="200,301,0,0"/>
         <TextBox x:Name="DateTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="170" Margin="200,108,0,0"/>
         <Label x:Name="label_Copy7" Content="Тэги" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="48,0,0,154"/>
         <TextBox x:Name="TagsTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="170" Margin="200,0,0,156"/>
+        <ComboBox x:Name="GenreComboBox" VerticalAlignment="Top" Margin="203,225,53,0"/>
 
     </Grid>
 </Window>

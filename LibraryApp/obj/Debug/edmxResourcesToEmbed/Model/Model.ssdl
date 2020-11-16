@@ -10,12 +10,19 @@
     <Property Name="PublicationDate" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="CoverImage" Type="varbinary(max)" />
-    <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BookGenre" Type="int" Nullable="false" />
     <Property Name="NumberOfCopies" Type="int" Nullable="false" />
     <Property Name="PublishedBooks" Type="bit" Nullable="false" />
     <Property Name="PenaltyPoint" Type="int" Nullable="false" />
     <Property Name="Tags" Type="nvarchar(max)" />
     <Property Name="IsBlocked" Type="bit" />
+  </EntityType>
+  <EntityType Name="Genres">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Genre" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Journal">
     <Key>
@@ -25,7 +32,7 @@
     <Property Name="BookingStartDate" Type="datetime" Nullable="false" />
     <Property Name="BookingEndDate" Type="datetime" />
     <Property Name="ReservationCode" Type="int" Nullable="false" />
-    <Property Name="BookingStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookingStatus" Type="int" Nullable="false" />
     <Property Name="IdReader" Type="int" Nullable="false" />
     <Property Name="IdBook" Type="int" Nullable="false" />
   </EntityType>
@@ -41,6 +48,13 @@
     <Property Name="ReaderRating" Type="int" Nullable="false" />
     <Property Name="IdUser" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
@@ -51,6 +65,18 @@
     <Property Name="IsBlocked" Type="bit" Nullable="false" />
     <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Books_Genres">
+    <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+    <End Role="Books" Type="Self.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genres">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="BookGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Journal_Books">
     <End Role="Books" Type="Self.Books" Multiplicity="1" />
     <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
@@ -75,6 +101,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Journal_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="BookingStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Readers_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="Readers" Type="Self.Readers" Multiplicity="*" />
@@ -89,15 +127,25 @@
   </Association>
   <EntityContainer Name="Хранилище LibraryDBModelContainer">
     <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Journal" EntityType="Self.Journal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Readers" EntityType="Self.Readers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Books_Genres" Association="Self.FK_Books_Genres">
+      <End Role="Genres" EntitySet="Genres" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
     <AssociationSet Name="FK_Journal_Books" Association="Self.FK_Journal_Books">
       <End Role="Books" EntitySet="Books" />
       <End Role="Journal" EntitySet="Journal" />
     </AssociationSet>
     <AssociationSet Name="FK_Journal_Readers" Association="Self.FK_Journal_Readers">
       <End Role="Readers" EntitySet="Readers" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Status" Association="Self.FK_Journal_Status">
+      <End Role="Status" EntitySet="Status" />
       <End Role="Journal" EntitySet="Journal" />
     </AssociationSet>
     <AssociationSet Name="FK_Readers_Users" Association="Self.FK_Readers_Users">

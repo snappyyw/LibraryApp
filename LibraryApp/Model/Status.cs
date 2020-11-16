@@ -12,18 +12,18 @@ namespace LibraryApp.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Journal
+    public partial class Status
     {
-        public int Id { get; set; }
-        public System.DateTime BookingStartDate { get; set; }
-        public Nullable<System.DateTime> BookingEndDate { get; set; }
-        public int ReservationCode { get; set; }
-        public int BookingStatus { get; set; }
-        public int IdReader { get; set; }
-        public int IdBook { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Status()
+        {
+            this.Journal = new HashSet<Journal>();
+        }
     
-        public virtual Books Books { get; set; }
-        public virtual Readers Readers { get; set; }
-        public virtual Status Status { get; set; }
+        public int Id { get; set; }
+        public string Status1 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Journal> Journal { get; set; }
     }
 }

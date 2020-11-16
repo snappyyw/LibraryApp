@@ -12,7 +12,7 @@ namespace LibraryApp.Logic
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
         public void PenaltyPoint(Journal journal)
         {
-            if (journal.BookingStatus == "Возвращено")
+            if (journal.BookingStatus == 5)
             {
                 Readers readers = libraryDBEntities.Readers.FirstOrDefault(p => p.Id == journal.IdReader);
                 if (journal.BookingEndDate < DateTime.Now)

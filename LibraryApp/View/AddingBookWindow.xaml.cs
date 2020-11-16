@@ -27,6 +27,8 @@ namespace LibraryApp.View
         public AddingBookWindow()
         {
             InitializeComponent();
+            GenreComboBox.ItemsSource = libraryDBEntities.Genres.Select(s=>s.Genre).ToList();
+            GenreComboBox.SelectedIndex = 0;
         }
 
         public AddingBookWindow(Books books)
@@ -38,7 +40,8 @@ namespace LibraryApp.View
             NameTextBox.Text = books.Name;
             InstancesTextBox.Text = books.NumberOfCopies.ToString();
             PointsTextBox.Text = books.PenaltyPoint.ToString();
-            GenreTextBox.Text = books.Genre;
+            GenreComboBox.ItemsSource = libraryDBEntities.Genres.Select(s => s.Genre).ToList();
+            GenreComboBox.SelectedIndex = books.BookGenre-1;
             DiskripTextBox.Text = books.Description;
             DateTextBox.Text = books.PublicationDate.ToString();
             TagsTextBox.Text = books.ToString();
@@ -54,7 +57,7 @@ namespace LibraryApp.View
                 _books.Name = NameTextBox.Text;
                 _books.NumberOfCopies = int.Parse(InstancesTextBox.Text);
                 _books.PenaltyPoint = int.Parse(PointsTextBox.Text);
-                _books.Genre = GenreTextBox.Text;
+                _books.BookGenre = GenreComboBox.SelectedIndex+1;
                 _books.Description = DiskripTextBox.Text;
                 _books.PublicationDate = int.Parse(DateTextBox.Text);
                 _books.Tags = TagsTextBox.Text;
@@ -66,7 +69,7 @@ namespace LibraryApp.View
                         Books tempBook = libraryDBEntities.Books.FirstOrDefault(u => u.Id == _books.Id);
                         tempBook.Author = AuthorTextBox.Text;
                         tempBook.Description = DiskripTextBox.Text;
-                        tempBook.Genre = GenreTextBox.Text;
+                        tempBook.BookGenre = GenreComboBox.SelectedIndex+1;
                         tempBook.Name = NameTextBox.Text;
                         tempBook.NumberOfCopies = int.Parse(InstancesTextBox.Text);
                         tempBook.PenaltyPoint = int.Parse(PointsTextBox.Text);
@@ -99,8 +102,6 @@ namespace LibraryApp.View
                 error.AppendLine("Укажите автора");
             if (NameTextBox.Text=="")
                 error.AppendLine("Укажите Название");
-            if (GenreTextBox.Text=="")
-                error.AppendLine("Укажите жанр");
             if(!int.TryParse(InstancesTextBox.Text,out a))
                 error.AppendLine("Укажите кол-во копий");
             if (!int.TryParse(PointsTextBox.Text, out a))

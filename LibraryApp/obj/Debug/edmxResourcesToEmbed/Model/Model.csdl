@@ -10,13 +10,22 @@
     <Property Name="PublicationDate" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CoverImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookGenre" Type="Int32" Nullable="false" />
     <Property Name="NumberOfCopies" Type="Int32" Nullable="false" />
     <Property Name="PublishedBooks" Type="Boolean" Nullable="false" />
     <Property Name="PenaltyPoint" Type="Int32" Nullable="false" />
     <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsBlocked" Type="Boolean" />
+    <NavigationProperty Name="Genres" Relationship="Self.FK_Books_Genres" FromRole="Books" ToRole="Genres" />
     <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Books" FromRole="Books" ToRole="Journal" />
+  </EntityType>
+  <EntityType Name="Genres">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Books_Genres" FromRole="Genres" ToRole="Books" />
   </EntityType>
   <EntityType Name="Journal">
     <Key>
@@ -26,11 +35,12 @@
     <Property Name="BookingStartDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="BookingEndDate" Type="DateTime" Precision="3" />
     <Property Name="ReservationCode" Type="Int32" Nullable="false" />
-    <Property Name="BookingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookingStatus" Type="Int32" Nullable="false" />
     <Property Name="IdReader" Type="Int32" Nullable="false" />
     <Property Name="IdBook" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Books" Relationship="Self.FK_Journal_Books" FromRole="Journal" ToRole="Books" />
     <NavigationProperty Name="Readers" Relationship="Self.FK_Journal_Readers" FromRole="Journal" ToRole="Readers" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Journal_Status" FromRole="Journal" ToRole="Status" />
   </EntityType>
   <EntityType Name="Readers">
     <Key>
@@ -46,6 +56,14 @@
     <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Readers" FromRole="Readers" ToRole="Journal" />
     <NavigationProperty Name="Users" Relationship="Self.FK_Readers_Users" FromRole="Readers" ToRole="Users" />
   </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Status" FromRole="Status" ToRole="Journal" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
@@ -57,6 +75,18 @@
     <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Readers" Relationship="Self.FK_Readers_Users" FromRole="Users" ToRole="Readers" />
   </EntityType>
+  <Association Name="FK_Books_Genres">
+    <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+    <End Role="Books" Type="Self.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genres">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="BookGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Journal_Books">
     <End Role="Books" Type="Self.Books" Multiplicity="1" />
     <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
@@ -81,6 +111,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Journal_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="BookingStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Readers_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="Readers" Type="Self.Readers" Multiplicity="*" />
@@ -95,15 +137,25 @@
   </Association>
   <EntityContainer Name="LibraryDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Books" EntityType="Self.Books" />
+    <EntitySet Name="Genres" EntityType="Self.Genres" />
     <EntitySet Name="Journal" EntityType="Self.Journal" />
     <EntitySet Name="Readers" EntityType="Self.Readers" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
     <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Books_Genres" Association="Self.FK_Books_Genres">
+      <End Role="Genres" EntitySet="Genres" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
     <AssociationSet Name="FK_Journal_Books" Association="Self.FK_Journal_Books">
       <End Role="Books" EntitySet="Books" />
       <End Role="Journal" EntitySet="Journal" />
     </AssociationSet>
     <AssociationSet Name="FK_Journal_Readers" Association="Self.FK_Journal_Readers">
       <End Role="Readers" EntitySet="Readers" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Status" Association="Self.FK_Journal_Status">
+      <End Role="Status" EntitySet="Status" />
       <End Role="Journal" EntitySet="Journal" />
     </AssociationSet>
     <AssociationSet Name="FK_Readers_Users" Association="Self.FK_Readers_Users">

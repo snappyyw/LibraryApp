@@ -22,15 +22,14 @@ namespace LibraryApp.View
     public partial class JournalWindow : Window
     {
         LibraryDBEntities libraryDBEntities = new LibraryDBEntities();
-        List<string> status = new List<string>() { "Ожидает подтверждения", "Принято", "Отказано", "Кинга передана читателю", "Возвращено" };
         DBQueryHelp dBQueryHelp = new DBQueryHelp();
         PointHelp pointHelp = new PointHelp();
         int _id;
         public JournalWindow(Journal journal)
         {
             InitializeComponent();
-            StatusComboBox.ItemsSource = status;
-            StatusComboBox.SelectedIndex = 0;
+            StatusComboBox.ItemsSource = libraryDBEntities.Status.Select(s=>s.Status1).ToList();
+            StatusComboBox.SelectedIndex = journal.BookingStatus-1;
             DateStart.SelectedDate = journal.BookingStartDate;
             DateEnd.SelectedDate = journal.BookingEndDate;
             StatusComboBox.SelectedItem = journal.BookingStatus;
@@ -45,7 +44,7 @@ namespace LibraryApp.View
                 Journal journal = libraryDBEntities.Journal.FirstOrDefault(p => p.Id == _id);
                 journal.BookingStartDate = (DateTime)DateStart.SelectedDate;
                 journal.BookingEndDate = (DateTime)DateEnd.SelectedDate;
-                journal.BookingStatus = StatusComboBox.SelectedItem.ToString();
+                journal.BookingStatus = StatusComboBox.SelectedIndex+1;
                 journal.ReservationCode = int.Parse(CodeTextBox.Text);
                 pointHelp.PenaltyPoint(journal);
                 try

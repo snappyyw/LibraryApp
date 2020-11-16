@@ -64,7 +64,7 @@ namespace LibraryApp.View
                 Books books = (Books)DataGridBook.SelectedItems[0];
                 Journal journal = new Journal();
                 journal.BookingStartDate = DateTime.Now;
-                journal.BookingStatus = "Ожидает подтверждения";
+                journal.BookingStatus = 1;
                 journal.IdBook = books.Id;
                 journal.ReservationCode = _code;
                 journal.IdReader = _id;
